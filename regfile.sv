@@ -10,7 +10,7 @@ module regfile ( input logic [9:0]SW,
              assign enable = KEY[1];
              assign rA = SW[8:7];
              assign rB = SW[6:5];
-             assgin write = SW[9];
+             assign write = SW[9];
 				 
 function automatic [6:0] sevenseg(input logic [3:0] data);
     logic D3, D2, D1, D0;
@@ -198,5 +198,6 @@ endfunction
 
 				
 endmodule
+
 
 
