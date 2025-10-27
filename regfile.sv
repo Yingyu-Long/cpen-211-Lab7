@@ -10,6 +10,7 @@ module regfile ( input logic [9:0]SW,
              assign enable = KEY[1];
              assign rA = SW[8:7];
              assign rB = SW[6:5];
+             assgin write = SW[9];
 				 
 function automatic [6:0] sevenseg(input logic [3:0] data);
     logic D3, D2, D1, D0;
@@ -71,27 +72,9 @@ endfunction
              end
              
 
-             always_ff @( posedge enable ) begin  
-                if(SW[9] ==1) begin
+             always_ff @( posedge enable ) begin  // write operation
+                if(write) begin
                     case (rA)
-                        2'b00: begin
-                            R0 <= dataW;
-                        end
-
-                        2'b01: begin
-                            R1 <= dataW;
-                        end
-
-                        2'b10: begin
-                            R2 <= dataW;
-                        end
-
-                        2'b11: begin
-                            R3 <= dataW;
-                        end
-                    endcase
-
-                    case (rB)
                         2'b00: begin
                             R0 <= dataW;
                         end
@@ -117,6 +100,44 @@ endfunction
 
              end
              end
+
+                always_comb begin  // read operation
+                    case (rA)
+                        2'b00: begin
+                            dataA = R0;
+                        end
+    
+                        2'b01: begin
+                            dataA = R1;
+                        end
+    
+                        2'b10: begin
+                            dataA = R2;
+                        end
+    
+                        2'b11: begin
+                            dataA = R3;
+                        end
+                    endcase
+    
+                    case (rB)
+                        2'b00: begin
+                            dataB = R0;
+                        end
+    
+                        2'b01: begin
+                            dataB = R1;
+                        end
+    
+                        2'b10: begin
+                            dataB = R2;
+                        end
+    
+                        2'b11: begin
+                            dataB = R3;
+                        end
+                    endcase
+                end
 
             always_comb begin
                 case(rA)
