@@ -17,7 +17,7 @@ module regfile(
              assign rB = selB;
              assign write = WE;
 				 
-             always_ff @( posedge enable ) begin  // write operation
+	always_ff @( posedge clk ) begin  // write operation
                 if(write) begin
                     case (rA)
                         2'b00: begin
@@ -84,4 +84,5 @@ module regfile(
                 end
 			
 endmodule
+
 
