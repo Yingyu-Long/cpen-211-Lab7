@@ -25,7 +25,7 @@ module alu(
 						end
 						
 						2'b11: begin
-							result = dataA / dataB;
+							result = dataA && dataB;
 						end
 					endcase
 					
@@ -43,5 +43,6 @@ endmodule
 
 					 
 					 
+
 
 		
